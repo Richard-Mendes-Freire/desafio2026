@@ -1,0 +1,14 @@
+---
+title: "Solução"
+---
+
+# Pacotes e dados
+```{r}
+library(rio)
+library(tidyverse)
+
+graos <- import("graos.csv")
+capsulas <- import("capsulas.xlsx")
+laboratorio <- import("laboratorio.xlsx")
+```
+
