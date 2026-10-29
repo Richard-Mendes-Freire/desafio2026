@@ -1,1 +1,99 @@
-/* css styles */
+/* =========================================
+   1. NAVBAR - EFEITO GLASSMORPHISM
+   ========================================= */
+.navbar {
+    background: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease-in-out;
+}
+
+.navbar-brand, .nav-link {
+    color: #333 !important;
+    font-weight: 600;
+}
+
+/* =========================================
+   2. SIDEBAR (BARRA LATERAL) ANIMADA
+   ========================================= */
+.sidebar {
+    background-color: #fcfcfc;
+    border-right: 1px solid #eaeaea;
+    box-shadow: 2px 0 15px rgba(0,0,0,0.02);
+}
+
+.sidebar-item-text {
+    font-weight: 500;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* Efeito de deslocamento ao passar o mouse nos links da barra lateral */
+.sidebar-item:hover .sidebar-item-text {
+    color: #0d6efd !important; /* Azul Bootstrap */
+    transform: translateX(6px);
+    display: inline-block;
+}
+
+/* =========================================
+   3. TIPOGRAFIA: TÍTULOS COM GRADIENTE
+   ========================================= */
+h1, h2 {
+    background: -webkit-linear-gradient(45deg, #0d6efd, #0dcaf0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+}
+
+/* =========================================
+   4. CARDS BOOTSTRAP: EFEITO DE ELEVAÇÃO
+   ========================================= */
+.card {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: #ffffff;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+}
+
+/* =========================================
+   5. BOTÕES: EFEITO PULSO E BRILHO
+   ========================================= */
+.btn-primary {
+    background: linear-gradient(45deg, #0d6efd, #0b5ed7);
+    border: none;
+    border-radius: 30px;
+    padding: 10px 24px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(13, 110, 253, 0.4);
+}
+
+/* =========================================
+   6. ANIMAÇÃO DE ENTRADA DO CONTEÚDO (FADE IN)
+   ========================================= */
+main.content {
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}

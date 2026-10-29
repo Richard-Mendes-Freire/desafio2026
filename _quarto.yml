@@ -5,13 +5,22 @@ project:
 website:
   title: "Desafio R 2026"
   navbar:
+    background: primary
+    search: true
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
-      - desafio_2026.qmd
-      - solucao.qmd
-      - resolucao2026.qmd
+  sidebar:
+    style: "floating" # Permite que a barra lateral flutue e oculte em telas pequenas
+    glass: true
+    collapse-level: 1
+    contents:
+      - section: "Menu do Desafio"
+        contents:
+          - about.qmd
+          - desafio_2026.qmd
+          - solucao.qmd
+          - resolucao2026.qmd
 
 format:
   html:
@@ -20,6 +29,6 @@ format:
       - brand
     css: styles.css
     toc: true
+    smooth-scroll: true # Efeito suave ao clicar nos links do TOC
 
 editor: visual
-
