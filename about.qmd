@@ -1,9 +1,23 @@
 ---
-title: "About"
+title: "Sobre o Projeto"
 ---
 
-About this site
+Este portal foi desenvolvido como parte dos requisitos de avaliação da disciplina de Introdução à Linguagem R (PPGRGV/UFSC) da Universidade Federal de Santa Catarina (UFSC), com foco em análise no ambiente R.
 
-```{r}
-1 + 1
-```
+::: {.card .p-4 .mt-4}
+### 📋 Informações do Desafio 2026
+
+Abaixo estão os dados acadêmicos referentes a este desafio:
+
+<br>
+
+- **📚 Disciplina:** RGV410046 - Introdução à Linguagem R de Programação
+- **🏛️ Programa:** Pós-Graduação em Recursos Genéticos Vegetais (UFSC)
+- **👨‍🏫 Professor:** Prof. Dr. Tiago Olivoto
+- **👨‍🎓 Aluno:** Ms. Richard Bruno Mendes Freire (PPGFAP/UFSC - MIND.Funga)
+
+:::
+
+::: {.mt-5}
+[⬅️ Voltar para a Home](index.qmd){.btn .btn-primary}
+:::

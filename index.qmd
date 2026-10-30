@@ -1,11 +1,48 @@
 ---
-title: "desafio2026"
+title: "Bem-vindo ao Desafio R 2026"
+format: html
 ---
 
-This is a Quarto website.
+Bem-vindo à plataforma interativa do **Desafio R 2026**. Explore as fronteiras da análise de dados, visualização e modelagem estatística em um ambiente dinâmico e responsivo.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+Selecione um dos módulos abaixo para iniciar sua jornada pelos dados:
 
-```{r}
-1 + 1
-```
+::: {.grid .mt-4}
+
+::: {.g-col-12 .g-col-md-6}
+::: {.card .p-4 .h-100}
+### 📌 Sobre o Projeto
+Entenda a motivação, os objetivos principais e a metodologia por trás do desafio de análise de dados deste ano.
+
+[Conhecer o Projeto](about.qmd){.btn .btn-primary .mt-4}
+:::
+:::
+
+::: {.g-col-12 .g-col-md-6}
+::: {.card .p-4 .h-100}
+### 🚀 O Desafio 2026
+Explore a base de dados, as regras de negócio e os problemas complexos que precisam ser resolvidos utilizando R.
+
+[Ver o Desafio](desafio_2026.qmd){.btn .btn-primary .mt-4}
+:::
+:::
+
+::: {.g-col-12 .g-col-md-6}
+::: {.card .p-4 .h-100}
+### 💡 Solução Proposta
+Acompanhe o passo a passo do código, a estratégia de limpeza de dados e a modelagem aplicada para chegar aos resultados.
+
+[Analisar Solução](solucao.qmd){.btn .btn-primary .mt-4}
+:::
+:::
+
+::: {.g-col-12 .g-col-md-6}
+::: {.card .p-4 .h-100}
+### 📊 Resultados Finais
+Visualize as conclusões, métricas de desempenho e os insights acionáveis extraídos da resolução do desafio.
+
+[Ver Resultados](resolucao.qmd){.btn .btn-primary .mt-4}
+:::
+:::
+
+:::

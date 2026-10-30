@@ -1,20 +1,132 @@
 ---
-title: "Códigos"
+title: "Visualização gráfica e conclusões"
 ---
 
-# Pacotes
+## Etapa 4: Exploração e Visualização gráfica
 ```{r}
-library(rio)
-df <- import("laboratorio.xlsx", setclass = "tbl")
-df
+library("rio")
+library(tidyverse)
+genotipos_final <- import("genotipo_final.xlsx")
+top5_genotipos <- import("top5_genotipos.xlsx")
+
+# Como a altura da planta se relaciona com o número de cápsulas?
+ggplot(genotipos_final, aes(x = ap, y = nc, color = tipo)) +
+  geom_point(size = 3, alpha = 0.9) +
+  scale_color_manual(
+    values = c(
+      "DOURADA" = "#D4A017",
+      "MARROM" = "#8B4513"
+    )
+  ) +
+  labs(
+    title = "Relação entre altura da planta e número de cápsulas",
+    x = "Altura da planta (ap)",
+    y = "Número de cápsulas (nc)",
+    color = "Tipo de linhaça"
+  ) +
+  theme_minimal()
+
+
+# Comparação da altura entre tipos: MARROM e DOURADA
+ggplot(genotipos_final, aes(x = tipo, y = ap, fill = tipo)) +
+  geom_boxplot(alpha = 0.7) +
+  geom_jitter(aes(color = tipo), width = 0.13, size = 2, alpha = 0.9) +
+  scale_fill_manual(
+    values = c(
+      "DOURADA" = "#D4A017",
+      "MARROM" = "#8B4513"
+    )
+  ) +
+  scale_color_manual(
+    values = c(
+      "DOURADA" = "#D4A017",
+      "MARROM" = "#8B4513"
+    )
+  ) +
+  labs(
+    title = "Altura das plantas por tipo de linhaça",
+    x = "Tipo de linhaça",
+    y = "Altura da planta (ap)"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+
+# Os 5 principais genótipos para produção de grãos (mg)
+top5_genotipos <-
+  genotipos_final |>
+  group_by(tipo) |>
+  slice_max(
+    order_by = mg,
+    n = 5,
+    with_ties = FALSE
+  ) |>
+  ungroup()
+
+### ggplot
+ggplot(top5_genotipos,
+       aes(x = reorder(gen, mg), y = mg, fill = tipo)) +
+  geom_col() +
+  scale_fill_manual(
+    values = c(
+      "DOURADA" = "#D4A017",
+      "MARROM" = "#8B4513"
+    )
+  ) +
+  coord_flip() +
+  facet_wrap(~ tipo, scales = "free_y") +
+  labs(
+    title = "Top 5 genótipos para produção de grãos",
+    x = "Genótipo",
+    y = "Média de produção de grãos (mg)"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+# Diferença da média geral e a média dos top 5 genótipos
+dif_selecao <- genotipos_final |>
+  group_by(tipo) |>
+  summarise(
+    media_geral = mean(mg, na.rm = TRUE),
+    media_top5 = mean(top5_genotipos$mg[
+      top5_genotipos$tipo == first(tipo)
+    ], na.rm = TRUE),
+    diferencial = media_top5 - media_geral,
+    .groups = "drop"
+  )
+
+media_geral <- mean(genotipos_final$mg, na.rm = TRUE)
+
+## ggplot
+ggplot(dif_selecao,
+       aes(x = tipo, y = media_top5, fill = tipo)) +
+  geom_col(width = 0.6) +
+  geom_hline(
+    yintercept = mean(genotipos_final$mg, na.rm = TRUE),
+    color = "black",
+    linetype = "dashed",
+    linewidth = 0.8
+  ) +
+  scale_fill_manual(
+    values = c(
+      "DOURADA" = "#D4A017",
+      "MARROM" = "#8B4513"
+    )
+  ) +
+  geom_text(
+    aes(label = round(media_top5, 2)),
+    vjust = -0.5,
+    size = 4
+  ) +
+  labs(
+    title = "Produção de grãos dos cinco melhores genótipos",
+    x = "Tipo de linhaça",
+    y = "Produção média de grãos (mg)"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none")
+
 ```
 
-# Exploração
-
-# Gráfica
-```{r}
-hist(df$MG)
-```
-
-
-
+## 5 Conclusão:
+*Com base nas análises realizadas e nos resultados visualizados, conclui-se que os genótipos (GEN) avaliados apresentaram variabilidade quanto à produção de grãos. A relação entre altura das plantas (ap) e número de cápsulas (nc) mostrou que o tipo de linhaça MARROM apresenta uma média maior comparada o tipo DOURADA. Entre os cinco genótipos com maior produção de grãos (MG) da linhaça DOURADA, G5 (5,28) e G56 (5,09) destacaram-se pela maior produção de grãos, enquanto para o tipo MARROM, G4 (7,04) e G2 (6,32) apresentaram os melhores resultados. A respeito do diferencial de seleção, a média dos 5 principais foi maior para o tipo MARROM (5,83 mg), e para DOURADA (4,31 mg). Comparada a média geral, observou uma diferença de 3,62mg para MARROM e 2,03mg para DOURADA, indicando maior potencial de diferenciação entre os genótipos selecionados e a média geral nesse grupo. Dessa forma, os resultados permitem identificar os genótipos e tipos de linhaça promissores para a produção de grãos e reforçam a importância da avaliação das características para a seleção.*

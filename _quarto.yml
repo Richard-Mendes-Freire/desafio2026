@@ -5,13 +5,13 @@ project:
 website:
   title: "Desafio R 2026"
   navbar:
-    background: primary
+    background: dark
     search: true
     left:
       - href: index.qmd
         text: Home
   sidebar:
-    style: "floating" # Permite que a barra lateral flutue e oculte em telas pequenas
+    style: "floating"
     glass: true
     collapse-level: 1
     contents:
@@ -25,10 +25,10 @@ website:
 format:
   html:
     theme:
-      - cosmo
+      - darkly # Tema escuro base
       - brand
     css: styles.css
     toc: true
-    smooth-scroll: true # Efeito suave ao clicar nos links do TOC
+    smooth-scroll: true
 
 editor: visual

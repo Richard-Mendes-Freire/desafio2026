@@ -1,6 +1,5 @@
 ---
 title: "Orientações"
-author: "Seu Nome"
 format: 
   html:
     toc: true
@@ -62,55 +61,7 @@ Seu trabalho é criar um script em R, dentro deste documento Quarto, que realize
 
 ```{r setup, message=FALSE, warning=FALSE}
 # Escreva seu código aqui para carregar os pacotes e importar os dados.
-
-library(rio)
-library(tidyverse)
-
-graos <- import("graos.csv")
-capsulas <- import("capsulas.xlsx")
-laboratorio <- import("laboratorio.xlsx")
-
-### graos
-graoseparate <-
-  graos |>
-  select(img, length, width)
-
-graos_resumo <- graoseparate |>
-  # Extrair o img numérico do início do nome da imagem
-  mutate(img = str_extract(img, "^\\d+")) |>
-
-  # Agrupar os registros por planta
-  group_by(img) |>
-
-  # Calcular as métricas de cada planta
-  summarise(
-    total_graos = n(),
-    length = mean(length, na.rm = TRUE),
-    width = mean(width, na.rm = TRUE),
-    .groups = "drop"
-    ) |> 
-
-# teste de visualização
-  filter(width < 0.35, width > 0.1)
-
-ggplot(graos_resumo, aes(x = width))+
-  geom_histogram()
-
-### capsulas
-capsulas_separate <- 
-  capsulas |>
-  select(img)
-
-capsulas_resumo <- 
-  capsulas_separate |> mutate(img = str_extract(img, "^\\d+")) |>
- # Agrupar os registros por planta
-  group_by(img) |>
-   # Calcular as métricas de cada planta
-  summarise(
-    total_capsulas = n())
-
-                             
-
+                            
 ```
 
 ### 2. Análise e Consolidação por Planta

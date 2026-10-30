@@ -1,14 +1,102 @@
 ---
-title: "Solução"
+title: "Códigos e script Desafio 2026"
 ---
 
-# Pacotes e dados
-
+## Etapa 1: Preparação do ambiente (Pacotes e dados)
 ```{r}
 library(rio)
 library(tidyverse)
 
 graos <- import("graos.csv")
+
 capsulas <- import("capsulas.xlsx")
-laboratorio <- import("laboratorio.xlsx")
+
+mmg <- import("mmg.xlsx")|>
+  rename_with(tolower)
+
+laboratorio <- import("laboratorio.xlsx") |>
+  rename_with(tolower)
+```
+
+## Etapa 2: Análise e Consolidação por Planta
+```{r}
+# Graos
+graoseparar <-
+  graos |>
+  select(img, length, width)
+
+graos_resumo <- graoseparar |>
+  # Extrair o img numérico do início do nome da imagem
+  mutate(img = str_extract(img, "^\\d+")) |>
+
+  # Agrupar os registros por planta
+  group_by(img) |>
+
+  # Calcular as métricas de cada planta
+  summarise(
+    total_graos = n(),
+    length = mean(length, na.rm = TRUE),
+    width = mean(width, na.rm = TRUE),
+    .groups = "drop"
+    ) |> 
+
+# teste de visualização
+  filter(width < 0.35, width > 0.1)
+ 
+# renomear colunas de graos
+    graos_resumo <-
+  graos_resumo |>
+  rename(ng = total_graos, cg = length, lg = width)
+    
+# Capsulas
+capsulas_separar <- 
+  capsulas |>
+  select(img)
+
+capsulas_resumo <- 
+  capsulas_separar |> mutate(img = str_extract(img, "^\\d+")) |>
+ ## Agrupar os registros por planta
+  group_by(img) |>
+   ## Calcular as métricas de cada planta
+  summarise(
+    total_capsulas = n())
+
+## renomear coluna
+capsulas_resumo <-
+  capsulas_resumo |>
+  rename(nc = total_capsulas)
+
+# unificação dos valores de NG, GC, LC, NC
+
+## Graos
+graos_resumo <- graos_resumo |>
+  mutate(img = as.numeric(img))
+
+## Capsulas
+capsulas_resumo <- capsulas_resumo |>
+  mutate(img = as.numeric(img))
+
+## Unificar colunas
+laboratorio_final <- laboratorio |>
+  left_join(graos_resumo, by = c("img" = "img")) |>
+  left_join(capsulas_resumo, by = c("img" = "img"))
+```
+
+## Etapa 3: Análise e Consolidação por Genótipo
+```{r}
+genotipos_resumo <- laboratorio_final |>
+  group_by(gen, tipo) |>
+  summarise(
+    np = n_distinct(img),
+    across(
+      where(is.numeric) & !any_of("img"),
+      ~ mean(.x, na.rm = TRUE)
+    ),
+    .groups = "drop"
+  )
+
+# Juntar mmg no df de genótipos
+genotipos_final <- genotipos_resumo |>
+  left_join(mmg, by = c("gen", "tipo"))
+
 ```

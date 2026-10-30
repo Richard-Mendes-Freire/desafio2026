@@ -1,73 +1,94 @@
 /* =========================================
-   1. NAVBAR - EFEITO GLASSMORPHISM
+   1. FUNDO GERAL
+   ========================================= */
+body {
+    background-color: #121212 !important;
+    color: #e0e0e0;
+}
+
+/* =========================================
+   2. NAVBAR - DARK GLASSMORPHISM
    ========================================= */
 .navbar {
-    background: rgba(255, 255, 255, 0.8) !important;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+    background: rgba(18, 18, 18, 0.75) !important;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
     transition: all 0.3s ease-in-out;
 }
 
 .navbar-brand, .nav-link {
-    color: #333 !important;
+    color: #ffffff !important;
     font-weight: 600;
 }
 
 /* =========================================
-   2. SIDEBAR (BARRA LATERAL) ANIMADA
+   3. SIDEBAR (BARRA LATERAL) ESCURA
    ========================================= */
 .sidebar {
-    background-color: #fcfcfc;
-    border-right: 1px solid #eaeaea;
-    box-shadow: 2px 0 15px rgba(0,0,0,0.02);
+    background-color: #181818;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.5);
 }
 
 .sidebar-item-text {
     font-weight: 500;
+    color: #a0a0a0;
     transition: color 0.3s ease, transform 0.3s ease;
 }
 
-/* Efeito de deslocamento ao passar o mouse nos links da barra lateral */
+/* Efeito de deslocamento no Dark Mode */
 .sidebar-item:hover .sidebar-item-text {
-    color: #0d6efd !important; /* Azul Bootstrap */
+    color: #0dcaf0 !important; /* Ciano Neon */
     transform: translateX(6px);
     display: inline-block;
 }
 
 /* =========================================
-   3. TIPOGRAFIA: TÍTULOS COM GRADIENTE
+   4. TIPOGRAFIA: GRADIENTE NEON
    ========================================= */
-h1, h2 {
-    background: -webkit-linear-gradient(45deg, #0d6efd, #0dcaf0);
+h1, h2, h3 {
+    background: -webkit-linear-gradient(45deg, #0dcaf0, #0d6efd);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: 800;
     margin-bottom: 1.5rem;
 }
 
+/* Corrigindo a cor dos links comuns para não sumirem no fundo preto */
+a {
+    color: #0dcaf0;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+a:hover {
+    color: #0d6efd;
+}
+
 /* =========================================
-   4. CARDS BOOTSTRAP: EFEITO DE ELEVAÇÃO
+   5. CARDS: MODO ESCURO COM ELEVAÇÃO
    ========================================= */
 .card {
-    border: none;
+    border: 1px solid rgba(255,255,255,0.05);
     border-radius: 16px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.04);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    background: #ffffff;
+    background: #1e1e1e;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.7);
+    border-color: rgba(13, 202, 240, 0.3); /* Borda brilha levemente */
 }
 
 /* =========================================
-   5. BOTÕES: EFEITO PULSO E BRILHO
+   6. BOTÕES: GLOW NEON
    ========================================= */
 .btn-primary {
-    background: linear-gradient(45deg, #0d6efd, #0b5ed7);
+    background: linear-gradient(45deg, #0d6efd, #0dcaf0);
+    color: #fff !important;
     border: none;
     border-radius: 30px;
     padding: 10px 24px;
@@ -77,11 +98,11 @@ h1, h2 {
 
 .btn-primary:hover {
     transform: scale(1.05);
-    box-shadow: 0 8px 20px rgba(13, 110, 253, 0.4);
+    box-shadow: 0 8px 25px rgba(13, 202, 240, 0.5); /* Sombra neon */
 }
 
 /* =========================================
-   6. ANIMAÇÃO DE ENTRADA DO CONTEÚDO (FADE IN)
+   7. ANIMAÇÃO DE ENTRADA
    ========================================= */
 main.content {
     animation: fadeIn 0.8s ease-in-out;
